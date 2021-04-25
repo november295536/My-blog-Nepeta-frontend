@@ -1,32 +1,29 @@
-<template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">Nepeta</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
+<template lang="pug">
+  div.container
+    div
+      Logo
+      h1.title Nepeta
+      v-btn(@click="buttonOnClick") test test
+      div.links
+        a(href="https://nuxtjs.org/"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
+          class="button--green") Documentation
+        a(href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+          class="button--grey") GitHub
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    async buttonOnClick() {
+      const posts = await this.$repository.posts.getAll()
+      console.log(posts)
+    },
+  },
+}
 </script>
 
 <style>

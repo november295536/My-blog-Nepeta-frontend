@@ -1,4 +1,8 @@
+import env from './.env.json'
+
 export default {
+  // import env
+  env,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Nepeta',
@@ -23,7 +27,14 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    // https://vuetifyjs.com/zh-Hans/
+    '@nuxtjs/vuetify',
   ],
+
+  vuetify: {
+    customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -34,7 +45,19 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:8080', // Used as fallback if no runtime config is provided
+  },
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: env.api.client,
+    },
+  },
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: env.api.server,
+    },
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
