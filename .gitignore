@@ -2,6 +2,9 @@
 
 .env.json
 
+# develop data
+.develop-data.js
+
 ### Node template
 # Logs
 /logs
