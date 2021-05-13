@@ -1,14 +1,14 @@
 <template lang="pug">
-  div
-    v-app.main-container
-      .hero
-        v-responsive(:aspect-ratio="10/1")
-          NuxtLink(to="/").home-page-link
-            h1.blog-title Aegis
-          h2.motto Strong opinions, weakly held.
-      .content-container
-        Nuxt
-      .footer
+  v-app.main-container
+    .hero
+      v-responsive(:aspect-ratio="10/1")
+        NuxtLink(to="/").home-page-link
+          h1.blog-title Aegis
+        h2.motto Strong opinions, weakly held.
+    .content-container
+      Nuxt
+    .footer
+      //- <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       
 </template>
 

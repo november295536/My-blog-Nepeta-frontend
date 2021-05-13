@@ -1,9 +1,12 @@
+import data from '../.develop-data'
 import { path } from './apiConfig'
 
 const createRespository = (requestHandler) => {
   return {
-    async getAll() {
-      return await requestHandler.get(path.posts.getAll)
+    // async getAll() {
+    getAll() {
+      return data.map(postFormatter)
+      // return await requestHandler.get(path.posts.getAll)
     },
     async create(params) {
       return await requestHandler.post(path.posts.create, params)
@@ -16,3 +19,17 @@ const createRespository = (requestHandler) => {
 }
 
 export default createRespository
+
+const postFormatter = (rawPost) => {
+  const post = {
+    ...rawPost,
+    lastEditTime: timeFormatter(rawPost.lastEditTime),
+    createTime: timeFormatter(rawPost.createTime),
+    slug: String(rawPost.slug),
+  }
+  return post
+}
+
+const timeFormatter = (time) => {
+  return new Date(time)
+}

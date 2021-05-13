@@ -1,29 +1,39 @@
 <template lang="pug">
-  .container
-    .post-list
-    .widget-area
-      Profile
+  v-container(fluid)
+    v-row
+      v-col.post-list(
+        cols="12"
+        lg="9")
+        post-viewer.posts(
+          v-for="post in posts"
+          :key="post.id"
+          :title="post.title"
+          :date="post.createTime"
+          :slug="post.slug"
+          :content="post.content"
+          )
+      v-col.widget-area(
+        cols="12"
+        lg="3")
+        profile
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    posts() {
+      return this.$repository.posts.getAll()
+    },
+  },
+}
 </script>
 
 <style lang="sass" scoped>
 .container
-  display: flex
-  height: fit-content
-  margin-right: auto
-  margin-left: auto
   @include screen-until($sm)
     display: block
 .post-list
-  flex: 3
-  width: 100%
   padding: 0 15px
-  // background: RED
 .widget-area
-  flex: 1
-  // width: 390px
   padding: 0 15px
 </style>
