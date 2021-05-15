@@ -1,18 +1,27 @@
 const path = {
+  auth: {
+    login: '/api/auth/login',
+  },
   posts: {
     create: '/api/posts/creaate',
     getAll: '/api/posts/getAll',
     getBySlug: '/api/posts/get/:slug',
   },
 }
-const createAxiosInstance = (axios) => {
+const createAxiosInstance = (axios, store) => {
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: `Bearer ${store.state.user.auth.token || ''}`,
+    },
+  })
+
   return {
     async get(url, params) {
       if (params) url = `${url}${urlParams(params)}`
-      return await axios.$get(url)
+      return await axiosInstance.$get(url)
     },
     async post(url, params) {
-      return await axios.$post(url, params)
+      return await axiosInstance.$post(url, params)
     },
   }
 }
