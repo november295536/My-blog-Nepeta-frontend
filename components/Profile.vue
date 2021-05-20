@@ -48,7 +48,7 @@ export default {
 .profile
   width: 100%
   padding: 15px
-  font-size: 1.2em
+  font-size: 1.5em
 .divider
   margin: 10px 0
 .link-img
@@ -57,4 +57,10 @@ export default {
   margin-right: 5px
 .introduce
   margin-bottom: 10px
+@include screen-until($md)
+  .profile
+    font-size: 1.3em
+@include screen-until($sm)
+  .profile
+    font-size: 1.2em
 </style>
