@@ -6,6 +6,7 @@ const path = {
     post: {
       create: '/api/admin/post/create',
       update: '/api/admin/post/update',
+      delete: '/api/admin/post/delete',
     },
   },
   posts: {

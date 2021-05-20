@@ -17,7 +17,6 @@ export const actions = {
         username,
         password,
       })
-      // console.log(data)
       localStorage.setItem('accessToken', accessToken)
       location.href = '/'
     } catch (error) {
