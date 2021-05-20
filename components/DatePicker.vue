@@ -14,9 +14,10 @@
         v-model='value',
         :label='label',
         prepend-icon='mdi-calendar',
-        :rules="rules"
-        clearable
-        required
+        :rules='rules',
+        :disabled='readonly',
+        clearable,
+        required,
         readonly,
         v-bind='attrs',
         v-on='on'
@@ -38,6 +39,10 @@ export default {
     rules: {
       type: Array,
       default: () => [],
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

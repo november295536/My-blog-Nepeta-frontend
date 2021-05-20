@@ -3,27 +3,33 @@ client-only
   .post-editor
     v-form(v-model='valid', ref='form')
       .title
-        v-text-field#title(v-model='title', label='Title')
+        v-text-field#title(
+          v-model='title',
+          label='Title',
+          :rules='[(v) => !!v || "Title is required"]'
+        )
       .slug
-        v-text-field(v-model='slug', label='Slug')
+        v-text-field#slug(v-model='slug', label='Slug')
       .create-time
         date-picker(
           v-model='createTime',
           label='Create time',
-          :rules='[(v) => !!v || "Date is required"]'
+          :readonly='!isCreate'
         )
-      .lastEditTime(v-if='!!createTime')
+      .lastEditTime(v-if='showLastEditTime')
         date-picker(
           v-model='lastEditTime',
           label='Last edit time',
+          :readonly='!isCreate',
           :rules='[(v) => !!v || "Date is required"]'
         )
       .published
         v-checkbox(v-model='published', label='Publish')
-      .publishTime(v-if='!!createTime && published')
+      .publishTime(v-if='showPublishTime')
         date-picker(
           v-model='publishTime',
           label='Publish time',
+          :readonly='!isCreate',
           :rules='[(v) => !!v || "Date is required"]'
         )
       .category
@@ -53,13 +59,17 @@ client-only
 <script>
 export default {
   props: {
+    mode: {
+      type: String,
+      default: 'create',
+    },
     post: {
       type: Object,
       default: () => {},
     },
     categoryItems: {
       type: Array,
-      default: () => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 113],
+      default: () => [],
     },
     tagItems: {
       type: Array,
@@ -73,12 +83,25 @@ export default {
       slug: null,
       createTime: null,
       lastEditTime: null,
-      published: null,
+      published: false,
       publishTime: null,
       category: null,
-      tag: null,
+      tag: [],
       content: null,
     }
+  },
+  computed: {
+    isCreate() {
+      return this.mode === 'create'
+    },
+    showLastEditTime() {
+      if (!this.isCreate) return true
+      return !!this.createTime
+    },
+    showPublishTime() {
+      if (this.publishTime) return true
+      return this.published && !!this.createTime
+    },
   },
   created() {
     if (this.post) {
@@ -90,11 +113,23 @@ export default {
       this.publishTime = this.post.publishTime
       this.category = this.post.category
       this.tag = this.post.tag
+      this.content = this.post.content
     }
   },
   methods: {
     submit() {
-      console.log(123)
+      if (!this.$refs.form.validate()) return
+      const post = {
+        title: this.title,
+        slug: this.slug,
+        createTime: this.createTime,
+        lastEditTime: this.lastEditTime,
+        published: this.published,
+        category: this.category,
+        tag: this.tag,
+        content: this.content,
+      }
+      this.$emit('submit', post)
     },
   },
 }
