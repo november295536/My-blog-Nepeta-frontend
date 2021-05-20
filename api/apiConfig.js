@@ -2,9 +2,14 @@ const path = {
   auth: {
     login: '/api/auth/login',
   },
+  admin: {
+    post: {
+      create: '/api/admin/post/create',
+      update: '/api/admin/post/update',
+    },
+  },
   posts: {
-    create: '/api/posts/creaate',
-    getAll: '/api/posts/getAll',
+    getPage: '/api/posts',
     getBySlug: '/api/posts/get/:slug',
   },
 }
