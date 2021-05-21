@@ -5,11 +5,14 @@ v-container(fluid)
       post-viewer.posts(
         v-for='post in posts',
         :key='post.id',
+        :id='post.id',
+        :showEdit='isLogin',
         :title='post.title',
         :date='post.publishedTime',
         :slug='post.slug',
-        :published="post.published"
-        :content='post.content'
+        :published='post.published',
+        :content='post.content',
+        @edit='editPost'
       )
       v-pagination.pageination(
         v-if='totalPage > 1',
@@ -22,6 +25,9 @@ v-container(fluid)
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import testData from '~/.develop-data'
+
 export default {
   async asyncData({ query, $repository }) {
     const page = query.page || 1
@@ -33,7 +39,19 @@ export default {
       totalItems: data.totalItems,
     }
   },
+  computed: {
+    ...mapGetters({
+      isLogin: 'user/auth/isLogin',
+    }),
+  },
+  mounted() {
+    window.test1 = testData
+    window.test2 = this.posts
+  },
   methods: {
+    ...mapActions({
+      editPostInit: 'post/editPostInit',
+    }),
     async pageChange(value) {
       const currentPath = this.$route.path
       const targetPath =
@@ -44,6 +62,10 @@ export default {
       this.page = value
       this.totalPage = data.totalPage
       this.totalItems = data.totalItems
+    },
+    editPost(id) {
+      const editingPost = this.posts.find((post) => post.id === id)
+      this.editPostInit(editingPost)
     },
   },
 }
