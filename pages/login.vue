@@ -4,20 +4,18 @@
     v-form(ref='form', v-model='valid')
       v-text-field.username(
         v-model='username',
-        label='Username',
+        label='username',
         :rules='usernameRules',
         required
       )
       v-text-field.password(
         v-model='password',
-        :append-icon='showPassword ? "mdi-eye" : "mdi-eye-off"',
-        label='Password',
+        label='password',
         :rules='passwordRules',
-        :type='showPassword ? "text" : "password"',
-        @click:append='showPassword = !showPassword',
+        type='password',
         required
       )
-      v-btn.submit(@click='login') login
+    v-btn.submit(@click='login') login
 </template>
 
 <script>
@@ -29,7 +27,6 @@ export default {
       valid: false,
       username: '',
       password: '',
-      showPassword: false,
       usernameRules: [(username) => !!username || 'required'],
       passwordRules: [(password) => !!password || 'required'],
     }
