@@ -19,6 +19,8 @@
             template(v-slot:top)
               v-toolbar(flat)
                 v-toolbar-title 文章列表
+                v-spacer
+                v-btn.mb-2(color='primary', dark, @click='createPost') New Post
                 v-dialog(v-model='deleteDialog', max-width='500px')
                   v-card
                     v-card-title 確定要刪除文章？
@@ -34,7 +36,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import { postFormatter } from '~/tool/postFormatter'
 
 export default {
   data() {
@@ -57,13 +60,17 @@ export default {
         { text: 'Publist date', value: 'publishedTime' },
         { text: 'Actions', value: 'actions' },
       ],
-      posts: [],
+      rawPosts: [],
     }
   },
   computed: {
     ...mapGetters({
       isLogin: 'user/auth/isLogin',
     }),
+    posts() {
+      if (this.rawPosts.length === 0) return []
+      return this.rawPosts.map(postFormatter.dateToISOString)
+    },
   },
   watch: {
     options: {
@@ -78,43 +85,39 @@ export default {
     this.reload()
   },
   methods: {
+    ...mapActions({
+      createPost: 'post/createPostInit',
+      editPostInit: 'post/editPostInit',
+    }),
     async reload() {
       this.loading = true
       const data = await this.$repository.posts.getPage(
         this.options.page,
         this.options.itemsPerPage
       )
-      this.posts = data.posts.map(this.postFormater)
+      this.rawPosts = data.posts
       this.totalItems = data.totalItems
       this.loading = false
+    },
+    editPost(targetPost) {
+      const editingpost = this.rawPosts.find(
+        (post) => post.id === targetPost.id
+      )
+      this.editPostInit(editingpost)
     },
     deletePost(post) {
       this.postToDelete = post
       this.deleteDialog = true
-      console.log('want to delete', post)
-    },
-    editPost(post) {
-      console.log('want to  edit', post)
     },
     cancelDelete() {
-      console.log('cancel detlte', this.postToDelete)
       this.postToDelete = null
       this.deleteDialog = false
     },
     async confirmDelete() {
-      console.log('confirm delete', this.postToDelete)
       await this.$repository.posts.delete(this.postToDelete.id)
       await this.reload()
       this.postToDelete = null
       this.deleteDialog = false
-    },
-    postFormater(post) {
-      return {
-        ...post,
-        lastEditTime: post.lastEditTime.toDateString(),
-        createTime: post.createTime.toDateString(),
-        publishedTime: post.publishedTime.toDateString(),
-      }
     },
   },
 }
