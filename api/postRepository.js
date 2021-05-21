@@ -1,5 +1,6 @@
 // import data from '../.develop-data'
 import { path } from './apiConfig'
+import { postFormatter } from '~/tool/postFormatter'
 
 const createRespository = (requestHandler) => {
   return {
@@ -9,7 +10,7 @@ const createRespository = (requestHandler) => {
       if (size < 0) size = 100000
       const data = await requestHandler.get(path.posts.getPage, { page, size })
       return {
-        posts: data.posts.map(postFormatter),
+        posts: data.posts.map(postFormatter.javaInstantToJSDate),
         currentPage: data.currentPage + 1,
         totalPage: data.totalPage,
         totalItems: data.totalItems,
@@ -28,22 +29,13 @@ const createRespository = (requestHandler) => {
     async delete(id) {
       return await requestHandler.post(path.admin.post.delete, { id })
     },
+    async getCategories() {
+      return await requestHandler.get(path.admin.config.getCategories)
+    },
+    async getTags() {
+      return await requestHandler.get(path.admin.config.getTags)
+    },
   }
 }
 
 export default createRespository
-
-const postFormatter = (rawPost) => {
-  const post = {
-    ...rawPost,
-    lastEditTime: timeFormatter(rawPost.lastEditTime),
-    createTime: timeFormatter(rawPost.createTime),
-    publishedTime: timeFormatter(rawPost.publishedTime),
-    slug: String(rawPost.slug),
-  }
-  return post
-}
-
-const timeFormatter = (time) => {
-  return new Date(time * 1000)
-}
