@@ -15,7 +15,7 @@ const path = {
   },
   posts: {
     getPage: '/api/posts',
-    getBySlug: '/api/posts/get/:slug',
+    getBySlug: '/api/posts/:slug',
   },
 }
 const createAxiosInstance = (axios, store) => {
