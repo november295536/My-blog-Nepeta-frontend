@@ -10,6 +10,8 @@ v-card.profile
     | 很愛買書，看完的比率有超過20％
     br
     | 貓狗通吃
+    br
+    | 要照顧眼睛，所以字體要放大
   v-divider.divider
   .personal-links
     h2 Where to find me
