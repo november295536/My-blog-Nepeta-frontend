@@ -22,7 +22,10 @@ const createRespository = (requestHandler) => {
       return postFormatter.javaInstantToJSDate(post)
     },
     async create(post) {
-      return await requestHandler.post(path.admin.post.create, post)
+      return await requestHandler.post(
+        path.admin.post.create,
+        postFormatter.ISOStringToTimestamp(post)
+      )
     },
     async update(post) {
       return await requestHandler.post(path.admin.post.update, post)

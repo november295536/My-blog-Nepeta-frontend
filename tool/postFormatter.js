@@ -1,4 +1,14 @@
 export const postFormatter = {
+  ISOStringToTimestamp(rawPost) {
+    const post = {
+      ...rawPost,
+      lastEditTime: timestampBuilder(rawPost.lastEditTime),
+      createTime: timestampBuilder(rawPost.createTime),
+      publishedTime: timestampBuilder(rawPost.publishedTime),
+    }
+
+    return post
+  },
   dateToISOString(rawPost) {
     const post = {
       ...rawPost,
@@ -19,6 +29,11 @@ export const postFormatter = {
 
     return post
   },
+}
+
+const timestampBuilder = (time) => {
+  if (!time) return null
+  return new Date(time).getTime() / 1000
 }
 
 const dateBuilder = (time) => {

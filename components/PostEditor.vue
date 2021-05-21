@@ -131,6 +131,7 @@ export default {
         createTime: this.createTime,
         lastEditTime: this.lastEditTime,
         published: this.published,
+        publishedTime: this.publishedTime,
         category: this.category,
         tag: this.tag,
         content: this.content,
