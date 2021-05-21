@@ -26,7 +26,6 @@ v-container(fluid)
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import testData from '~/.develop-data'
 
 export default {
   async asyncData({ query, $repository }) {
@@ -43,10 +42,6 @@ export default {
     ...mapGetters({
       isLogin: 'user/auth/isLogin',
     }),
-  },
-  mounted() {
-    window.test1 = testData
-    window.test2 = this.posts
   },
   methods: {
     ...mapActions({
