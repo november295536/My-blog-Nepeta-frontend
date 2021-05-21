@@ -1,5 +1,8 @@
 <template lang="pug">
   v-app.main-container
+    .admin-header(v-if="isLogin")
+      NuxtLink(to="/admin/dashboard").dashboard-link Dashboard
+      a.logout(@click.prevent="logout") logout
     .hero
       v-responsive(:aspect-ratio="10/1")
         NuxtLink(to="/").home-page-link
@@ -8,14 +11,55 @@
     .content-container
       Nuxt
     .footer
-      //- <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-      
+      p
+        a(href="https://github.com/november295536/Nepeta-frontend" target="_blank") SourceCode@frontend
+        span |
+        a(href="https://github.com/november295536/Cataria-backend" target="_blank") SourceCode@backend
+        span |
+        a(href="https://www.vultr.com/?ref=8555440" target="_blank") Host on Vultr
+        span |
+        span Icons made by
+        a(href="https://www.flaticon.com/authors/pixel-perfect" target="_blank") Pixel perfect
+        span from
+        a(href="https://www.flaticon.com/" target="_blank") www.flaticon.com
+      p Copyright © 2021 november295536      
 </template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({
+      isLogin: 'user/auth/isLogin',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      logout: 'user/auth/logout',
+    }),
+  },
+}
+</script>
 
 <style lang="sass" scoped>
 .main-container
   min-height: 100vh
   background: #F5F5F5 !important
+.admin-header
+  display: flex
+  position: fixed
+  background: aliceblue
+  width: 100%
+  z-index: 300
+  padding: 3px 15px
+  justify-content: flex-end
+.logout
+  color: #1976d2
+  text-decoration: underline
+  cursor: pointer
+.dashboard-link
+  margin-right: 10px
 .hero
   padding: 3% 6%
   background-size: cover
@@ -32,6 +76,11 @@
 .content-container
   padding: 20px
 .footer
-  height: 200px
-  background-color: #23282D
+  // color: #1976d2
+  height: 120px
+  padding: 20px 0
+  text-align: center
+  ::v-deep a, span
+    margin-right: 3px
+  // background-color: #23282D
 </style>
