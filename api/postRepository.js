@@ -18,7 +18,8 @@ const createRespository = (requestHandler) => {
     },
     async getBySlug(slug) {
       const url = path.posts.getBySlug.replace(':slug', slug)
-      return await requestHandler.get(url)
+      const post = await requestHandler.get(url)
+      return postFormatter.javaInstantToJSDate(post)
     },
     async create(post) {
       return await requestHandler.post(path.admin.post.create, post)

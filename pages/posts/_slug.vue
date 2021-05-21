@@ -4,12 +4,15 @@
       v-col.post-list(
         cols="12"
         lg="9")
-        //- Markdown-test
         post-viewer.posts(
+          :id='post.id',
           :title="post.title"
-          :date="post.createTime"
-          :slug="post.slug"
+          :showEdit='isLogin',
+          :date='post.publishedTime',
+          :slug='post.slug',
+          :published='post.published',
           :content="post.content"
+          @edit='editPost'
           )
       v-col.widget-area(
         cols="12"
@@ -18,12 +21,27 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
+  async asyncData({ route, $repository }) {
+    const slug = route.params.slug
+    const data = await $repository.posts.getBySlug(slug)
+    return {
+      post: data,
+    }
+  },
   computed: {
-    post() {
-      return this.$repository.posts
-        .getAll()
-        .find((post) => post.slug === this.$route.params.slug)
+    ...mapGetters({
+      isLogin: 'user/auth/isLogin',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      editPostInit: 'post/editPostInit',
+    }),
+    editPost() {
+      this.editPostInit(this.post)
     },
   },
 }
