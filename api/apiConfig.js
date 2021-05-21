@@ -8,6 +8,10 @@ const path = {
       update: '/api/admin/post/update',
       delete: '/api/admin/post/delete',
     },
+    config: {
+      getCategories: '/api/admin/config/categories',
+      getTags: '/api/admin/config/tags',
+    },
   },
   posts: {
     getPage: '/api/posts',
@@ -15,13 +19,12 @@ const path = {
   },
 }
 const createAxiosInstance = (axios, store) => {
-  const axiosInstance = axios.create({
-    headers: {
-      Authorization: `Bearer ${store.state.user.auth.token || ''}`,
-    },
-  })
+  const axiosInstance = axios.create()
+  const token = store.state.user.auth.token
+  if (token) axiosInstance.setToken(token, 'Bearer')
 
   return {
+    axios: axiosInstance,
     async get(url, params) {
       if (params) url = `${url}${urlParams(params)}`
       return await axiosInstance.$get(url)

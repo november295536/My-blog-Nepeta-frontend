@@ -13,18 +13,22 @@ export const mutations = {
 export const actions = {
   async login({ commit }, { username, password }) {
     try {
+      localStorage.removeItem('accessToken')
       const { accessToken } = await this.$api.post(path.auth.login, {
         username,
         password,
       })
       localStorage.setItem('accessToken', accessToken)
-      location.href = '/'
+      commit('setToken', accessToken)
+      this.$api.axios.setToken(accessToken, 'Bearer')
+      this.$router.push('/')
     } catch (error) {
       console.error(error)
     }
   },
   logout({ commit }) {
     commit('setToken', null)
+    this.$api.axios.setToken('', 'Bearer')
     localStorage.removeItem('accessToken')
     location.reload()
   },
