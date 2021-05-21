@@ -25,9 +25,9 @@ client-only
         )
       .published
         v-checkbox(v-model='published', label='Publish')
-      .publishTime(v-if='showPublishTime')
+      .publishedTime(v-if='showpublishedTime')
         date-picker(
-          v-model='publishTime',
+          v-model='publishedTime',
           label='Publish time',
           :readonly='!isCreate',
           :rules='[(v) => !!v || "Date is required"]'
@@ -57,11 +57,13 @@ client-only
 </template>
 
 <script>
+import { EDITOR_MODE } from '~/store/post'
+
 export default {
   props: {
     mode: {
       type: String,
-      default: 'create',
+      default: EDITOR_MODE.create,
     },
     post: {
       type: Object,
@@ -79,12 +81,13 @@ export default {
   data() {
     return {
       valid: true,
+      id: null,
       title: '',
       slug: null,
       createTime: null,
       lastEditTime: null,
       published: false,
-      publishTime: null,
+      publishedTime: null,
       category: null,
       tag: [],
       content: null,
@@ -92,25 +95,27 @@ export default {
   },
   computed: {
     isCreate() {
-      return this.mode === 'create'
+      return this.mode === EDITOR_MODE.create
     },
     showLastEditTime() {
       if (!this.isCreate) return true
       return !!this.createTime
     },
-    showPublishTime() {
-      if (this.publishTime) return true
+    showpublishedTime() {
+      if (this.publishedTime) return true
+      if (!this.isCreate) return false
       return this.published && !!this.createTime
     },
   },
   created() {
     if (this.post) {
+      this.id = this.post.id
       this.title = this.post.title
       this.slug = this.post.slug
       this.createTime = this.post.createTime
       this.lastEditTime = this.post.lastEditTime
       this.published = this.post.published
-      this.publishTime = this.post.publishTime
+      this.publishedTime = this.post.publishedTime
       this.category = this.post.category
       this.tag = this.post.tag
       this.content = this.post.content
@@ -120,6 +125,7 @@ export default {
     submit() {
       if (!this.$refs.form.validate()) return
       const post = {
+        id: this.id,
         title: this.title,
         slug: this.slug,
         createTime: this.createTime,
