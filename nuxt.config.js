@@ -2,7 +2,7 @@ const envPath = process.env.buildMode
   ? `./.env.${process.env.buildMode}.json`
   : './.env.json'
 const buildDir = process.env.buildMode ? '.nuxt' : '.develop'
-console.log(envPath)
+console.log(`use env ${envPath}`)
 const env = require(envPath)
 
 export default {
