@@ -1,23 +1,19 @@
 <template lang="pug">
-  v-container(fluid)
-    v-row
-      v-col.post-list(
-        cols="12"
-        lg="9")
-        post-viewer.posts(
-          :id='post.id',
-          :title="post.title"
-          :showEdit='isLogin',
-          :date='post.publishedTime',
-          :slug='post.slug',
-          :published='post.published',
-          :content="post.content"
-          @edit='editPost'
-          )
-      v-col.widget-area(
-        cols="12"
-        lg="3")
-        profile
+v-container(fluid)
+  v-row
+    v-col.post-list(cols='12', lg='9')
+      post-viewer.posts(
+        :id='post.id',
+        :title='post.title',
+        :showEdit='isLogin',
+        :date='post.publishedTime',
+        :slug='post.slug',
+        :published='post.published',
+        :content='post.content',
+        @edit='editPost'
+      )
+    v-col.widget-area(cols='12', lg='3')
+      profile
 </template>
 
 <script>
@@ -29,6 +25,12 @@ export default {
     const data = await $repository.posts.getBySlug(slug)
     return {
       post: data,
+    }
+  },
+  head() {
+    const title = `${this.post.title} - November295536's blog`
+    return {
+      title,
     }
   },
   computed: {
