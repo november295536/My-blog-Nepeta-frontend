@@ -55,6 +55,7 @@ export default {
     display: block
 .post-list
   padding: 0 15px
+  margin-bottom: 3%
 .widget-area
   padding: 0 15px
 </style>
