@@ -1,8 +1,9 @@
 <template lang="pug">
   v-app.main-container
-    .admin-header(v-if="isLogin")
-      NuxtLink(to="/admin/dashboard").dashboard-link Dashboard
-      a.logout(@click.prevent="logout") logout
+    client-only
+      .admin-header(v-if="isLogin")
+        NuxtLink(to="/admin/dashboard").dashboard-link Dashboard
+        a.logout(@click.prevent="logout") logout
     .hero
       v-responsive(:aspect-ratio="10/1")
         NuxtLink(to="/").home-page-link
