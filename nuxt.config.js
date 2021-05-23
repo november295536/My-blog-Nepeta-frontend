@@ -1,8 +1,14 @@
-import env from './.env.json'
+const envPath = process.env.buildMode
+  ? `./.env.${process.env.buildMode}.json`
+  : './.env.json'
+const buildDir = process.env.buildMode ? '.nuxt' : '.develop'
+console.log(envPath)
+const env = require(envPath)
 
 export default {
   // import env
   env,
+  buildDir,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "Aegis - November295536's blog",
