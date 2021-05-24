@@ -5,10 +5,9 @@ v-app.main-container
       NuxtLink.dashboard-link(to='/admin/dashboard') Dashboard
       a.logout(@click.prevent='logout') logout
   .hero
-    v-responsive(:aspect-ratio='10 / 1')
-      NuxtLink.home-page-link(to='/')
-        h1.blog-title Aegis
-      h2.motto Strong opinions, weakly held.
+    NuxtLink.home-page-link(to='/')
+      h1.blog-title Aegis
+    h2.motto Strong opinions, weakly held.
   .content-container
     Nuxt
   .footer
