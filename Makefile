@@ -7,4 +7,7 @@ production.build: yarn
 production.deploy:
 	sh nuxt-deploy.sh
 
+production.rollback:
+	ssh blog '. ~/.zshrc; sh /Nepeta/rollback.sh'
+
 production.build-and-deploy: production.build production.deploy

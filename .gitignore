@@ -76,6 +76,7 @@ typings/
 .develop
 .nuxt
 .deploy
+blog.tar.gz
 
 # Nuxt generate
 dist
