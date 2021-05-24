@@ -31,6 +31,14 @@ export default {
     const title = `${this.post.title} - November295536's blog`
     return {
       title,
+      meta: [
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+      ],
     }
   },
   computed: {

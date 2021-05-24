@@ -1,35 +1,53 @@
 <template lang="pug">
-  v-app.main-container
-    client-only
-      .admin-header(v-if="isLogin")
-        NuxtLink(to="/admin/dashboard").dashboard-link Dashboard
-        a.logout(@click.prevent="logout") logout
-    .hero
-      v-responsive(:aspect-ratio="10/1")
-        NuxtLink(to="/").home-page-link
-          h1.blog-title Aegis
-        h2.motto Strong opinions, weakly held.
-    .content-container
-      Nuxt
-    .footer
-      p
-        a(href="https://github.com/november295536/Nepeta-frontend" target="_blank") SourceCode@frontend
-        span |
-        a(href="https://github.com/november295536/Cataria-backend" target="_blank") SourceCode@backend
-        span |
-        a(href="https://www.vultr.com/?ref=8555440" target="_blank") Host on Vultr
-        span |
-        span Icons made by
-        a(href="https://www.flaticon.com/authors/pixel-perfect" target="_blank") Pixel perfect
-        span from
-        a(href="https://www.flaticon.com/" target="_blank") www.flaticon.com
-      p Copyright © 2021 november295536      
+v-app.main-container
+  client-only
+    .admin-header(v-if='isLogin')
+      NuxtLink.dashboard-link(to='/admin/dashboard') Dashboard
+      a.logout(@click.prevent='logout') logout
+  .hero
+    v-responsive(:aspect-ratio='10 / 1')
+      NuxtLink.home-page-link(to='/')
+        h1.blog-title Aegis
+      h2.motto Strong opinions, weakly held.
+  .content-container
+    Nuxt
+  .footer
+    p
+      a(
+        href='https://github.com/november295536/Nepeta-frontend',
+        target='_blank'
+      ) SourceCode@frontend
+      span |
+      a(
+        href='https://github.com/november295536/Cataria-backend',
+        target='_blank'
+      ) SourceCode@backend
+      span |
+      a(href='https://www.vultr.com/?ref=8555440', target='_blank') Host on Vultr
+      span |
+      span Icons made by
+      a(href='https://www.flaticon.com/authors/pixel-perfect', target='_blank') Pixel perfect
+      span from
+      a(href='https://www.flaticon.com/', target='_blank') www.flaticon.com
+    p Copyright © 2021 november295536
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  head() {
+    return {
+      meta: [
+        {
+          hid: 'og:image',
+          name: 'og:image',
+          property: 'og:image',
+          content: `${process.env.base}${require('~/assets/cover.jpg')}`,
+        },
+      ],
+    }
+  },
   computed: {
     ...mapGetters({
       isLogin: 'user/auth/isLogin',
@@ -78,8 +96,9 @@ export default {
   padding: 20px
 .footer
   // color: #1976d2
-  height: 120px
-  padding: 20px 0
+  height: fit-content
+  padding: 20px
+  word-break: break-word
   text-align: center
   ::v-deep a, span
     margin-right: 3px

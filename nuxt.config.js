@@ -15,7 +15,28 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          "November295536's personal blog. Nothing more than life, reading and tech.",
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: "Aegis - November295536's blog",
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content:
+          "November295536's personal blog. Nothing more than life, reading and tech.",
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: "Aegis - November295536's blog",
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
