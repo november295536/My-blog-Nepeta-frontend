@@ -28,7 +28,7 @@ v-app.main-container
       a(href='https://www.flaticon.com/authors/pixel-perfect', target='_blank') Pixel perfect
       span from
       a(href='https://www.flaticon.com/', target='_blank') www.flaticon.com
-    p Copyright © 2021 november295536
+    p Copyright © 2021 november295536, All right reserved.
 </template>
 
 <script>
