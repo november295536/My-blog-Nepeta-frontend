@@ -63,7 +63,7 @@ export default {
 <style lang="sass" scoped>
 .main-container
   min-height: 100vh
-  background: #F5F5F5 !important
+  // background: #F5F5F5 !important
 .admin-header
   display: flex
   position: fixed

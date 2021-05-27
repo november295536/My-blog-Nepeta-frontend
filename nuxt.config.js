@@ -41,14 +41,19 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    'github-markdown-css',
+    'markdown-it-latex/dist/index.css',
+    'highlight.js/styles/night-owl.css',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/api.js',
+    '~/plugins/markdown',
     // blog 理所當然要 SSR 但目前 markwond-it-vue 裡用了不支援 SSR 的依賴
     // 暫時先這樣處理
-    { src: '~/plugins/markdown-it-vue.js', mode: 'client' },
+    // { src: '~/plugins/markdown-it-vue.js', mode: 'client' },
     { src: '~/plugins/vue-mavon-editor.js', mode: 'client' },
   ],
 
