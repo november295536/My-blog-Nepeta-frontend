@@ -57,6 +57,7 @@ export default {
       this.page = value
       this.totalPage = data.totalPage
       this.totalItems = data.totalItems
+      scrollTo(0, 0)
     },
     editPost(id) {
       const editingPost = this.posts.find((post) => post.id === id)
