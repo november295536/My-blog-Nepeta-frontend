@@ -9,7 +9,7 @@ import MarkdownItInsert from 'markdown-it-ins'
 import MarkdownItMark from 'markdown-it-mark'
 import MarkdownItTasklists from 'markdown-it-task-lists'
 import MarkdownItLatex from 'markdown-it-latex'
-import MarkdownItSourceMap from 'markdown-it-source-map'
+// import MarkdownItSourceMap from 'markdown-it-source-map'
 import MarkdownItHighlightjs from 'markdown-it-highlightjs'
 import CustomHljs from '~/tool/markdown-it-highlight'
 // import MarkdownItContainer from 'markdown-it-container'
@@ -28,7 +28,7 @@ const md = new MarkdownIt(option)
   .use(MarkdownItInsert)
   .use(MarkdownItMark)
   .use(MarkdownItTasklists)
-  .use(MarkdownItSourceMap)
+  // .use(MarkdownItSourceMap)
   .use(MarkdownItLatex)
   .use(MarkdownItHighlightjs, { hljs: CustomHljs })
 // .use(MarkdownItContainer)

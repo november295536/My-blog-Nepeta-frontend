@@ -51,9 +51,6 @@ export default {
   plugins: [
     '~/plugins/api.js',
     '~/plugins/markdown',
-    // blog 理所當然要 SSR 但目前 markwond-it-vue 裡用了不支援 SSR 的依賴
-    // 暫時先這樣處理
-    // { src: '~/plugins/markdown-it-vue.js', mode: 'client' },
     { src: '~/plugins/vue-mavon-editor.js', mode: 'client' },
   ],
 

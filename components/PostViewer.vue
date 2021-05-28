@@ -13,7 +13,7 @@ v-card.post
 
   h2.title
     nuxt-link(:to='postPage') {{ title }}
-  markdown-it-vue(:content='content')
+  markdown-viewer(:content='content')
 </template>
 
 <script>
