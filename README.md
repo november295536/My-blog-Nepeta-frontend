@@ -1,5 +1,12 @@
 # Nepeta
 
+## Task list
+
+- [ ] Category System
+- [ ] Tag system
+- [ ] UI re-design
+- [ ] 拆分管理員到獨立專案 
+
 ## Build Setup
 
 ```bash
