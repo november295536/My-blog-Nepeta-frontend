@@ -8,6 +8,7 @@ module.exports = {
       args: 'start',
       env_production: {
         buildMode: 'production',
+        PORT: '3001',
       },
     },
   ],
