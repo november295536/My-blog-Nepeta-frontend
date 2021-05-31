@@ -8,6 +8,6 @@ production.deploy:
 	sh nuxt-deploy.sh
 
 production.rollback:
-	ssh blog '. ~/.zshrc; sh /Nepeta/rollback.sh'
+	ssh nov29 '. ~/.zshrc; sh /Nepeta/rollback.sh'
 
 production.build-and-deploy: production.build production.deploy
