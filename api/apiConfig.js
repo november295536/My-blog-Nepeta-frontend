@@ -3,7 +3,8 @@ const path = {
     login: '/api/auth/login',
   },
   admin: {
-    post: {
+    posts: {
+      all: '/api/admin/post/getAll',
       create: '/api/admin/post/create',
       update: '/api/admin/post/update',
       delete: '/api/admin/post/delete',
@@ -14,7 +15,7 @@ const path = {
     },
   },
   posts: {
-    getPage: '/api/posts',
+    getPublishedPost: '/api/posts',
     getBySlug: '/api/posts/:slug',
   },
 }

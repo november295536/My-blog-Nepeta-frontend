@@ -91,7 +91,7 @@ export default {
     }),
     async reload() {
       this.loading = true
-      const data = await this.$repository.posts.getPage(
+      const data = await this.$repository.posts.getAllPosts(
         this.options.page,
         this.options.itemsPerPage
       )

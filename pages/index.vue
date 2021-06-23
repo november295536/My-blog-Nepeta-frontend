@@ -30,7 +30,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   async asyncData({ query, $repository }) {
     const page = query.page || 1
-    const data = await $repository.posts.getPage(page)
+    const data = await $repository.posts.getPublishedPost(page)
     return {
       posts: data.posts,
       page: data.currentPage,
@@ -52,7 +52,7 @@ export default {
       const targetPath =
         value !== 1 ? `${currentPath}?page=${value}` : currentPath
       this.$router.push(targetPath)
-      const data = await this.$repository.posts.getPage(value)
+      const data = await this.$repository.posts.getPublishedPost(value)
       this.posts = data.posts
       this.page = value
       this.totalPage = data.totalPage

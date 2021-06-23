@@ -4,11 +4,29 @@ import { postFormatter } from '~/tool/postFormatter'
 
 const createRespository = (requestHandler) => {
   return {
-    async getPage(page = 1, size = 5) {
+    async getPublishedPost(page = 1, size = 5) {
       page--
       if (page < 0) throw new Error('Inavalid page number')
       if (size < 0) size = 100000
-      const data = await requestHandler.get(path.posts.getPage, { page, size })
+      const data = await requestHandler.get(path.posts.getPublishedPost, {
+        page,
+        size,
+      })
+      return {
+        posts: data.posts.map(postFormatter.javaInstantToJSDate),
+        currentPage: data.currentPage + 1,
+        totalPage: data.totalPage,
+        totalItems: data.totalItems,
+      }
+    },
+    async getAllPosts(page = 1, size = 5) {
+      page--
+      if (page < 0) throw new Error('Inavalid page number')
+      if (size < 0) size = 100000
+      const data = await requestHandler.get(path.admin.posts.all, {
+        page,
+        size,
+      })
       return {
         posts: data.posts.map(postFormatter.javaInstantToJSDate),
         currentPage: data.currentPage + 1,
@@ -23,15 +41,15 @@ const createRespository = (requestHandler) => {
     },
     async create(post) {
       return await requestHandler.post(
-        path.admin.post.create,
+        path.admin.posts.create,
         postFormatter.ISOStringToTimestamp(post)
       )
     },
     async update(post) {
-      return await requestHandler.post(path.admin.post.update, post)
+      return await requestHandler.post(path.admin.posts.update, post)
     },
     async delete(id) {
-      return await requestHandler.post(path.admin.post.delete, { id })
+      return await requestHandler.post(path.admin.posts.delete, { id })
     },
     async getCategories() {
       return await requestHandler.get(path.admin.config.getCategories)
