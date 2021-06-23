@@ -3,13 +3,14 @@ v-card.post
   .post-header
     .date(v-if='published') {{ time }}
     .published(v-else) 未發布
-    v-btn.mb-2(
-      v-if='showEdit',
-      color='primary',
-      dark,
-      small,
-      @click='editPost'
-    ) edit
+    client-only
+      v-btn.mb-2(
+        v-if='showEdit',
+        color='primary',
+        dark,
+        small,
+        @click='editPost'
+      ) edit
 
   h2.title
     nuxt-link(:to='postPage') {{ title }}
