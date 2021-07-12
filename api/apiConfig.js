@@ -3,15 +3,10 @@ const path = {
     login: '/api/auth/login',
   },
   admin: {
-    posts: {
-      all: '/api/admin/post/getAll',
-      create: '/api/admin/post/create',
-      update: '/api/admin/post/update',
-      delete: '/api/admin/post/delete',
-    },
+    posts: '/api/admin/posts',
     config: {
-      getCategories: '/api/admin/config/categories',
-      getTags: '/api/admin/config/tags',
+      getCategories: '/api/admin/categories',
+      getTags: '/api/admin/tags',
     },
   },
   posts: {
@@ -32,6 +27,13 @@ const createAxiosInstance = (axios, store) => {
     },
     async post(url, params) {
       return await axiosInstance.$post(url, params)
+    },
+    async put(url, params) {
+      return await axiosInstance.$put(url, params)
+    },
+    async delete(url, params) {
+      if (params) url = `${url}${urlParams(params)}`
+      return await axiosInstance.$delete(url)
     },
   }
 }

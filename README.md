@@ -23,7 +23,8 @@
 - [ ] Category System
 - [ ] Tag system
 - [ ] UI re-design
-- [ ] 拆分管理員到獨立專案 
+- [ ] 拆分管理員到獨立專案
+- [ ] jwt token auto renew
 
 ## 目錄結構
 這邊只列出 Nuxt 架構中沒有的部份。如果想知道 Nuxt 的運作機制，可以參考 [Nuxt.js docs](https://nuxtjs.org)。

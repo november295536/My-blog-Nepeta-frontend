@@ -23,7 +23,7 @@ const createRespository = (requestHandler) => {
       page--
       if (page < 0) throw new Error('Inavalid page number')
       if (size < 0) size = 100000
-      const data = await requestHandler.get(path.admin.posts.all, {
+      const data = await requestHandler.get(path.admin.posts, {
         page,
         size,
       })
@@ -41,15 +41,15 @@ const createRespository = (requestHandler) => {
     },
     async create(post) {
       return await requestHandler.post(
-        path.admin.posts.create,
+        path.admin.posts,
         postFormatter.ISOStringToTimestamp(post)
       )
     },
     async update(post) {
-      return await requestHandler.post(path.admin.posts.update, post)
+      return await requestHandler.put(path.admin.posts, post)
     },
     async delete(id) {
-      return await requestHandler.post(path.admin.posts.delete, { id })
+      return await requestHandler.delete(path.admin.posts, { id })
     },
     async getCategories() {
       return await requestHandler.get(path.admin.config.getCategories)
