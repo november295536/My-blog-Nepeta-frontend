@@ -4,6 +4,7 @@ const path = {
   },
   admin: {
     posts: '/api/admin/posts',
+    assets: '/api/admin/assets',
     config: {
       getCategories: '/api/admin/categories',
       getTags: '/api/admin/tags',
@@ -25,8 +26,8 @@ const createAxiosInstance = (axios, store) => {
       if (params) url = `${url}${urlParams(params)}`
       return await axiosInstance.$get(url)
     },
-    async post(url, params) {
-      return await axiosInstance.$post(url, params)
+    async post(url, params, config) {
+      return await axiosInstance.$post(url, params, config)
     },
     async put(url, params) {
       return await axiosInstance.$put(url, params)

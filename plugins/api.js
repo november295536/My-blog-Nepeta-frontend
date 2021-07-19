@@ -1,5 +1,6 @@
 import createAxiosInstance from '../api/apiConfig'
 import createPostRepository from '../api/postRepository'
+import createAssetsRepository from '../api/assestsRepository'
 
 export default (context, inject) => {
   const { $axios, store } = context
@@ -9,6 +10,7 @@ export default (context, inject) => {
   const requestHandler = createAxiosInstance($axios, store)
   const repository = {
     posts: createPostRepository(requestHandler),
+    assets: createAssetsRepository(requestHandler),
   }
 
   inject('api', requestHandler)

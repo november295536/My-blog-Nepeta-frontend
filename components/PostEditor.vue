@@ -51,7 +51,12 @@ client-only
           hide-selected
         )
       .content
-        mavon-editor(v-model='content', language='zh-TW')
+        mavon-editor(
+          v-model='content',
+          ref='editor',
+          language='zh-TW',
+          @imgAdd='imageAdd'
+        )
       .submit
         v-btn(@click='submit', color='success') Save
 </template>
@@ -137,6 +142,11 @@ export default {
         content: this.content,
       }
       this.$emit('submit', post)
+    },
+    async imageAdd(position, file) {
+      const { filePath } = await this.$repository.assets.uploadAssest(file)
+      const url = `${process.env.base}/${filePath}`
+      this.$refs.editor.$img2Url(position, url)
     },
   },
 }
