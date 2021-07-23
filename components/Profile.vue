@@ -29,10 +29,6 @@ export default {
           img: '/github.png',
         },
         {
-          link: 'https://leetcode.com/november295536/',
-          img: '/LeetCode.png',
-        },
-        {
           link: 'https://www.linkedin.com/in/chenghao-lee-0683a2111/',
           img: '/linkedin.png',
         },
